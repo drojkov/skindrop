@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Как купить скин — SkinDrop</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo"><span class="logo-mark"><i class="ph-fill ph-drop"></i></span>Skin<span class="logo-accent">Drop</span></a>
+      <nav class="header-nav">
+        <a href="index.html">Маркет</a>
+        <a href="how-to.html" class="is-active">Как купить</a>
+      </nav>
+      <div class="search">
+        <i class="ph ph-magnifying-glass"></i>
+        <input type="search" id="search" placeholder="Поиск: AK-47, авп, керамбит, asiimov…" autocomplete="off">
+      </div>
+      <nav class="header-actions">
+        <span class="user-name" id="user-name" hidden></span>
+        <button class="btn btn-ghost" id="login-btn">Войти</button>
+        <button class="btn btn-ghost" id="logout-btn" hidden>Выйти</button>
+        <button class="btn btn-primary" id="cart-btn">
+          <i class="ph ph-shopping-cart-simple"></i>Корзина <span class="cart-count" id="cart-count" hidden>0</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="howto-hero">
+      <h1>Как купить скин</h1>
+      <p>Четыре шага от выбора лота до предмета в инвентаре. Оплата проходит до передачи, но при сбое обмена деньги возвращаются в течение часа.</p>
+    </section>
+
+    <section class="steps">
+      <article class="step">
+        <div class="step-num">1</div>
+        <h3>Выберите лот</h3>
+        <p>В каталоге у каждой позиции указан износ и точный float. Фильтры сужают выбор по типу оружия, редкости и цене.</p>
+      </article>
+      <article class="step">
+        <div class="step-num">2</div>
+        <h3>Проверьте float</h3>
+        <p>Float — степень износа от 0 до 1. Чем меньше значение, тем чище рисунок. Мы сверяем его вручную перед публикацией лота.</p>
+      </article>
+      <article class="step">
+        <div class="step-num">3</div>
+        <h3>Оплатите заказ</h3>
+        <p>Укажите ссылку на обмен из настроек Steam и оплатите картой, через СБП или криптой. Комиссии магазина нет.</p>
+      </article>
+      <article class="step">
+        <div class="step-num">4</div>
+        <h3>Примите трейд-оффер</h3>
+        <p>Оффер приходит в Steam в среднем за 90 секунд. Подтвердите обмен в мобильном аутентификаторе — предмет в инвентаре.</p>
+      </article>
+    </section>
+
+    <section id="faq">
+      <div class="section-head" style="margin-bottom:16px"><h2>Частые вопросы</h2></div>
+      <div class="faq">
+        <details open>
+          <summary>Где взять ссылку на обмен</summary>
+          <p>Steam → Инвентарь → Предложения обмена → «Кто может отправлять мне предложения обмена». Внизу страницы есть ссылка вида steamcommunity.com/tradeoffer/new/?partner=… — её и нужно вставить при оплате.</p>
+        </details>
+        <details>
+          <summary>Что если трейд-оффер не пришёл</summary>
+          <p>Напишите в поддержку с номером заказа. Если обмен не состоялся, деньги возвращаются на тот же способ оплаты в течение часа.</p>
+        </details>
+        <details>
+          <summary>Почему цены ниже Steam</summary>
+          <p>В Steam с каждой продажи удерживается комиссия, и вывести деньги из кошелька нельзя. Мы работаем напрямую, поэтому цена в среднем на 18% ниже.</p>
+        </details>
+        <details>
+          <summary>Нужен ли мобильный аутентификатор</summary>
+          <p>Да. Без него Steam задерживает обмен на 15 дней — это ограничение платформы, а не магазина.</p>
+        </details>
+        <details>
+          <summary>Что такое StatTrak™</summary>
+          <p>Счётчик убийств на оружии. На идентичный скин со StatTrak™ цена обычно выше — это отдельные лоты в каталоге.</p>
+        </details>
+        <details>
+          <summary>Можно ли продать скин вам</summary>
+          <p>Пока нет: сейчас работает только покупка. Приём предметов планируем добавить позже.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <h4>SkinDrop</h4>
+        <p>Маркет скинов CS2 с проверенным float. Передача через трейд-оффер, возврат средств при сбое обмена.</p>
+      </div>
+      <div>
+        <h4>Магазин</h4>
+        <nav class="footer-links">
+          <a href="index.html">Каталог</a>
+          <a href="how-to.html">Как купить</a>
+          <a href="index.html#catalog-top">Фильтры и float</a>
+        </nav>
+      </div>
+      <div>
+        <h4>Поддержка</h4>
+        <nav class="footer-links">
+          <a href="how-to.html#faq">Частые вопросы</a>
+          <a href="mailto:help@skindrop.example">help@skindrop.example</a>
+          <a href="how-to.html#faq">Возврат средств</a>
+        </nav>
+      </div>
+    </div>
+    <div class="footer-bottom">SkinDrop · учебный проект, покупки не проводятся</div>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="products.js"></script>
+  <script src="shop.js"></script>
+</body>
+</html>

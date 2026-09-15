@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Оформление заказа — SkinDrop</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo"><span class="logo-mark"><i class="ph-fill ph-drop"></i></span>Skin<span class="logo-accent">Drop</span></a>
+      <nav class="header-actions">
+        <a href="index.html" class="btn btn-ghost">В каталог</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <section id="checkout-form-section">
+      <h1 class="page-title">Оформление заказа</h1>
+
+      <div class="checkout-grid">
+        <form class="panel checkout-form" id="checkout-form">
+          <h2>Передача скинов</h2>
+          <label>Никнейм <input type="text" name="nickname" id="field-nickname" required></label>
+          <label>Email для чека <input type="email" name="email" id="field-email" required></label>
+          <label>Ссылка на трейд-оффер
+            <input type="url" name="tradeLink" required placeholder="https://steamcommunity.com/tradeoffer/new/?partner=…">
+          </label>
+
+          <h2>Оплата</h2>
+          <label>Номер карты
+            <input type="text" name="card" required inputmode="numeric" pattern="[0-9 ]{16,19}" placeholder="0000 0000 0000 0000">
+          </label>
+          <div class="field-row">
+            <label>Срок <input type="text" name="expiry" required pattern="[0-9]{2}/[0-9]{2}" placeholder="MM/YY"></label>
+            <label>CVC <input type="text" name="cvc" required inputmode="numeric" pattern="[0-9]{3}" placeholder="123"></label>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block">Оплатить</button>
+          <p class="form-note">Учебный проект: деньги не списываются, данные никуда не отправляются.</p>
+        </form>
+
+        <aside class="panel order-summary">
+          <h2>Заказ · <span id="order-count">0</span></h2>
+          <div class="cart-items" id="order-items"></div>
+          <div class="cart-summary-total">
+            <span>Итого</span>
+            <span class="cart-total" id="order-total">$0.00</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="order-done" id="order-done" hidden>
+      <h1 class="page-title">Заказ принят</h1>
+      <p>Номер заказа <strong id="order-number"></strong>. Скины будут отправлены на указанный трейд-оффер.</p>
+      <a href="index.html" class="btn btn-primary">Вернуться в каталог</a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>SkinDrop · учебный проект, покупки не проводятся</p>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="products.js"></script>
+  <script src="checkout.js"></script>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkinDrop — маркет скинов CS2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo"><span class="logo-mark"><i class="ph-fill ph-drop"></i></span>Skin<span class="logo-accent">Drop</span></a>
+      <nav class="header-nav">
+        <a href="index.html" class="is-active">Маркет</a>
+        <a href="how-to.html">Как купить</a>
+      </nav>
+      <div class="search">
+        <i class="ph ph-magnifying-glass"></i>
+        <input type="search" id="search" placeholder="Поиск: AK-47, авп, керамбит, asiimov…" autocomplete="off">
+      </div>
+      <nav class="header-actions">
+        <span class="user-name" id="user-name" hidden></span>
+        <button class="btn btn-ghost" id="login-btn">Войти</button>
+        <button class="btn btn-ghost" id="logout-btn" hidden>Выйти</button>
+        <button class="btn btn-primary" id="cart-btn">
+          <i class="ph ph-shopping-cart-simple"></i>Корзина <span class="cart-count" id="cart-count" hidden>0</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Лента движения цен -->
+  <div class="ticker">
+    <div class="ticker-inner">
+      <span class="ticker-label"><i class="ph-fill ph-chart-line-up"></i>Рынок</span>
+      <div class="ticker-viewport"><div class="ticker-track" id="ticker-track"></div></div>
+      <span class="ticker-updated" id="ticker-time"></span>
+    </div>
+  </div>
+
+  <main>
+    <!-- Hero: цифры магазина и быстрые ссылки по категориям -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div>
+          <h1>Скины CS2 дешевле Steam</h1>
+          <p>Мгновенная передача через трейд-оффер. Проверка предмета до оплаты, возврат средств если трейд не прошёл.</p>
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><strong id="stat-count">0</strong><span>предложений</span></div>
+          <div class="stat"><strong id="stat-min">—</strong><span>минимальная цена</span></div>
+          <div class="stat"><strong>-18%</strong><span>к цене Steam</span></div>
+        </div>
+      </div>
+      <div class="hero-links">
+        <a href="#" data-type-link="knife">Ножи</a>
+        <a href="#" data-type-link="gloves">Перчатки</a>
+        <a href="#" data-type-link="rifle">Винтовки</a>
+        <a href="#" data-type-link="sniper">Снайперские</a>
+        <a href="#" data-type-link="pistol">Пистолеты</a>
+        <a href="#" data-type-link="smg">ПП</a>
+      </div>
+    </section>
+
+    <!-- Цифры сервиса -->
+    <section class="band reveal">
+      <div class="band-item">
+        <i class="ph ph-lightning"></i>
+        <div><strong>90 секунд</strong><span>медианное время выдачи</span></div>
+      </div>
+      <div class="band-item">
+        <i class="ph ph-shield-check"></i>
+        <div><strong>Возврат за час</strong><span>если трейд не прошёл</span></div>
+      </div>
+      <div class="band-item">
+        <i class="ph ph-magnifying-glass-plus"></i>
+        <div><strong>Float сверен</strong><span>инспекция каждой позиции</span></div>
+      </div>
+      <div class="band-item">
+        <i class="ph ph-handshake"></i>
+        <div><strong>4 200 сделок</strong><span>за последние 30 дней</span></div>
+      </div>
+    </section>
+
+    <!-- Топ-5 лотов дня -->
+    <section class="section reveal">
+      <div class="section-head">
+        <h2>Топ-5 лотов дня</h2>
+        <p>подборка обновляется каждые сутки</p>
+        <a href="#catalog-top">Весь каталог →</a>
+      </div>
+      <div class="top5">
+        <div class="top5-hero" id="top5-hero"></div>
+        <div class="top5-list" id="top5-list"></div>
+      </div>
+    </section>
+
+    <section class="shop" id="catalog-top">
+      <!-- Левая колонка: фильтры. Чекбоксы внутрь генерирует catalog.js -->
+      <form class="filters" id="filters">
+        <div class="filters-head">
+          <h2>Фильтры</h2>
+          <button type="button" class="link-btn" id="filters-reset">Сбросить</button>
+        </div>
+
+        <fieldset>
+          <legend>Тип</legend>
+          <div id="filter-type"></div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Цена, $</legend>
+          <div class="price-row">
+            <input type="number" id="min-price" placeholder="от" min="0">
+            <input type="number" id="max-price" placeholder="до" min="0">
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Редкость</legend>
+          <div id="filter-rarity"></div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Износ</legend>
+          <div id="filter-wear"></div>
+        </fieldset>
+
+        <fieldset>
+          <legend>StatTrak™</legend>
+          <label class="check"><input type="radio" name="stattrak" value="any" checked><span>Не важно</span></label>
+          <label class="check"><input type="radio" name="stattrak" value="yes"><span>Только StatTrak™</span></label>
+          <label class="check"><input type="radio" name="stattrak" value="no"><span>Без StatTrak™</span></label>
+        </fieldset>
+      </form>
+
+      <!-- Правая колонка: сортировка + сетка -->
+      <div class="catalog-wrap">
+        <div class="toolbar">
+          <button type="button" class="btn btn-ghost btn-small" id="filters-toggle"><i class="ph ph-sliders-horizontal"></i>Фильтры</button>
+          <span class="result-count" id="result-count"></span>
+          <select id="sort" class="select">
+            <option value="popular">По популярности</option>
+            <option value="price-asc">Сначала дешевле</option>
+            <option value="price-desc">Сначала дороже</option>
+            <option value="float-asc">Лучший float</option>
+            <option value="name">По названию</option>
+          </select>
+        </div>
+
+        <div class="catalog" id="catalog"></div>
+
+        <button type="button" class="btn btn-ghost btn-block show-more" id="show-more" hidden>Показать ещё 24</button>
+      </div>
+    </section>
+    <!-- Только что купили -->
+    <section class="section reveal" style="padding-bottom: 8px">
+      <div class="section-head">
+        <h2>Только что купили</h2>
+        <span class="feed-live"><span class="feed-dot"></span>обновляется в реальном времени</span>
+      </div>
+      <div class="feed" id="feed"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <h4>SkinDrop</h4>
+        <p>Маркет скинов CS2 с проверенным float. Передача через трейд-оффер, возврат средств при сбое обмена.</p>
+      </div>
+      <div>
+        <h4>Магазин</h4>
+        <nav class="footer-links">
+          <a href="index.html">Каталог</a>
+          <a href="how-to.html">Как купить</a>
+          <a href="index.html#catalog-top">Фильтры и float</a>
+        </nav>
+      </div>
+      <div>
+        <h4>Поддержка</h4>
+        <nav class="footer-links">
+          <a href="how-to.html#faq">Частые вопросы</a>
+          <a href="mailto:help@skindrop.example">help@skindrop.example</a>
+          <a href="how-to.html#faq">Возврат средств</a>
+        </nav>
+      </div>
+    </div>
+    <div class="footer-bottom">SkinDrop · учебный проект, покупки не проводятся</div>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="products.js"></script>
+  <script src="shop.js"></script>
+  <script src="catalog.js"></script>
+  <script src="home.js"></script>
+</body>
+</html>
