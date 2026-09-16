@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AML и KYC — SkinDrop</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Chakra+Petch:ital,wght@0,600;0,700;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo"><span class="logo-mark"><i class="ph-fill ph-drop"></i></span>Skin<span class="logo-accent">Drop</span></a>
+      <nav class="header-nav">
+        <a href="index.html" data-i18n="nav.market">Маркет</a>
+        <a href="how-to.html" data-i18n="nav.how">Как купить</a>
+      </nav>
+      <div class="search">
+        <i class="ph ph-magnifying-glass"></i>
+        <input type="search" id="search" placeholder="Найти скин: АК-47, Азимов, Керамбит и т.д." data-i18n-ph="search.ph" autocomplete="off">
+      </div>
+      <nav class="header-actions">
+        <span class="user-name" id="user-name" hidden></span>
+        <button class="btn btn-steam" id="login-btn"><svg class="steam-ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11.98 2C6.5 2 2.02 6.16 1.54 11.47l5.4 2.23a3.06 3.06 0 0 1 1.74-.54h.15l2.4-3.48v-.05a4.08 4.08 0 1 1 4.08 4.1h-.1l-3.42 2.44v.13a3.07 3.07 0 0 1-6.07.6L1.9 15.1A10.46 10.46 0 0 0 11.98 22.5C17.78 22.5 22.5 17.8 22.5 12S17.78 2 11.98 2Zm-4.4 15.53.6.25a2.31 2.31 0 1 0 1.27-3.02l.72.3a1.7 1.7 0 1 1-1.3 3.13l-1.29-.66Zm10.5-9.85a2.73 2.73 0 1 0-2.73 2.74 2.73 2.73 0 0 0 2.73-2.74Zm-4.77 0a2.05 2.05 0 1 1 2.05 2.06 2.05 2.05 0 0 1-2.05-2.06Z"/></svg><span data-i18n="auth.login">Войти через Steam</span></button>
+        <button class="btn btn-ghost" id="logout-btn" hidden data-i18n="auth.logout">Выйти</button>
+        <button class="btn btn-primary" id="cart-btn">
+          <i class="ph ph-shopping-cart-simple"></i><span data-i18n="cart.btn">Корзина</span> <span class="cart-count" id="cart-count" hidden>0</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <nav class="crumbs"><a href="index.html">Маркет</a><span>AML / KYC</span></nav>
+    <article class="doc">
+      <header class="doc-head">
+        <h1>Политика AML / KYC и санкционного контроля</h1>
+        <p class="doc-lead">Как оператор противодействует отмыванию средств, проверяет клиентов и соблюдает санкционные требования.</p>
+        <p class="doc-meta">Редакция от 17 сентября 2026 · версия 1.0</p>
+      </header>
+      <p class="doc-note">Шаблон документа. Перед публикацией заполните реквизиты компании и дайте текст на проверку юристу вашей юрисдикции.</p>
+      <section class="doc-sec">
+        <h2>1. Принципы</h2>
+        <p>Оператор применяет риск-ориентированный подход в соответствии с рекомендациями FATF и требованиями <span class="doc-fill">указать применимый закон и регулятора</span>. Ответственный сотрудник по комплаенсу: <span class="doc-fill">имя и контакт</span>.</p>
+      </section>
+      <section class="doc-sec">
+        <h2>2. Идентификация клиента</h2>
+        <p>Базовая идентификация — аккаунт Steam и подтверждённый способ оплаты. Расширенная проверка запускается при превышении порогов или при признаках риска и может включать: документ, удостоверяющий личность, подтверждение адреса, подтверждение источника средств, селфи-верификацию.</p>
+        <p>Пороги расширенной проверки: <span class="doc-fill">указать суммы за операцию и за 30 дней</span>.</p>
+      </section>
+      <section class="doc-sec">
+        <h2>3. Признаки подозрительных операций</h2>
+        <ul>
+        <li>Дробление платежей ниже порога проверки.</li>
+        <li>Оплата с карт или кошельков третьих лиц.</li>
+        <li>Быстрая перепродажа предметов без экономического смысла.</li>
+        <li>Несовпадение страны платежа, IP-адреса и данных аккаунта.</li>
+        <li>Отказ предоставить запрошенные документы.</li>
+        </ul>
+      </section>
+      <section class="doc-sec">
+        <h2>4. Санкционный контроль</h2>
+        <p>Клиенты и платежи проверяются по санкционным спискам (ООН, ЕС, OFAC, <span class="doc-fill">национальные списки</span>). Совпадение ведёт к отказу в обслуживании и, при наличии обязанности, к уведомлению уполномоченного органа.</p>
+      </section>
+      <section class="doc-sec">
+        <h2>5. Меры при срабатывании</h2>
+        <p>Операция приостанавливается, средства не возвращаются до завершения проверки, у клиента запрашиваются документы. По итогам проверки заказ исполняется, отменяется с возвратом средств или, при наличии законной обязанности, о нём сообщается уполномоченному органу. Клиент не уведомляется о факте сообщения, если уведомление запрещено законом.</p>
+      </section>
+      <section class="doc-sec">
+        <h2>6. Хранение и обучение</h2>
+        <p>Документы и записи проверок хранятся 5 лет после завершения отношений. Сотрудники проходят обучение по AML не реже одного раза в год.</p>
+      </section>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <h4>SkinDrop</h4>
+        <p>Маркет скинов CS2 с проверенным float. Передача через трейд-оффер, возврат средств при сбое обмена.</p>
+      </div>
+      <div>
+        <h4>Магазин</h4>
+        <nav class="footer-links">
+          <a href="index.html">Каталог</a>
+          <a href="how-to.html" data-i18n="nav.how">Как купить</a>
+          <a href="index.html#catalog-top">Фильтры и float</a>
+        </nav>
+      </div>
+      <div>
+        <h4>Документы</h4>
+        <nav class="footer-links">
+          <a href="terms.html">Пользовательское соглашение</a>
+          <a href="privacy.html">Политика конфиденциальности</a>
+          <a href="cookies.html">Политика cookie</a>
+          <a href="refund.html">Оплата и возврат</a>
+          <a href="aml.html">AML / KYC</a>
+        </nav>
+      </div>
+      <div>
+        <h4>Поддержка</h4>
+        <nav class="footer-links">
+          <a href="contacts.html">Контакты и реквизиты</a>
+          <a href="how-to.html#faq">Частые вопросы</a>
+          <a href="mailto:help@skindrop.example">help@skindrop.example</a>
+          <button type="button" class="link-btn" onclick="openCookieSettings()">Настройки cookie</button>
+        </nav>
+      </div>
+    </div>
+    <div class="footer-bottom">SkinDrop · учебный проект, покупки не проводятся · 18+</div>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="products.js"></script>
+  <script src="prefs.js"></script>
+  <script src="shop.js"></script>
+  <script src="consent.js"></script>
+</body>
+</html>

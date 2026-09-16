@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Оформление заказа — SkinDrop</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Chakra+Petch:ital,wght@0,600;0,700;1,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
   <link rel="stylesheet" href="style.css">
@@ -66,11 +66,45 @@
   </main>
 
   <footer class="footer">
-    <p>SkinDrop · учебный проект, покупки не проводятся</p>
+    <div class="footer-grid">
+      <div>
+        <h4>SkinDrop</h4>
+        <p>Маркет скинов CS2 с проверенным float. Передача через трейд-оффер, возврат средств при сбое обмена.</p>
+      </div>
+      <div>
+        <h4>Магазин</h4>
+        <nav class="footer-links">
+          <a href="index.html">Каталог</a>
+          <a href="how-to.html" data-i18n="nav.how">Как купить</a>
+          <a href="index.html#catalog-top">Фильтры и float</a>
+        </nav>
+      </div>
+      <div>
+        <h4>Документы</h4>
+        <nav class="footer-links">
+          <a href="terms.html">Пользовательское соглашение</a>
+          <a href="privacy.html">Политика конфиденциальности</a>
+          <a href="cookies.html">Политика cookie</a>
+          <a href="refund.html">Оплата и возврат</a>
+          <a href="aml.html">AML / KYC</a>
+        </nav>
+      </div>
+      <div>
+        <h4>Поддержка</h4>
+        <nav class="footer-links">
+          <a href="contacts.html">Контакты и реквизиты</a>
+          <a href="how-to.html#faq">Частые вопросы</a>
+          <a href="mailto:help@skindrop.example">help@skindrop.example</a>
+          <button type="button" class="link-btn" onclick="openCookieSettings()">Настройки cookie</button>
+        </nav>
+      </div>
+    </div>
+    <div class="footer-bottom">SkinDrop · учебный проект, покупки не проводятся · 18+</div>
   </footer>
 
   <script src="data.js"></script>
   <script src="products.js"></script>
+  <script src="prefs.js"></script>
   <script src="checkout.js"></script>
 </body>
 </html>

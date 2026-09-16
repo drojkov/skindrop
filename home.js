@@ -60,8 +60,11 @@ const pick = (arr, n, salt) =>
   const steam = p => formatPrice(p.price / 0.82);
 
   heroEl.style.setProperty("--rarity", RARITIES[hero.rarity].color);
+  heroEl.setAttribute("data-tilt", "");
   heroEl.innerHTML = `
+    <span class="card-halo"></span>
     <img src="${hero.image}" alt="" loading="lazy">
+    <span class="card-gloss"></span>
     <div class="top5-hero-body">
       <div class="top5-kicker">
         <span class="rarity-ink">${RARITIES[hero.rarity].label}</span>
@@ -69,9 +72,11 @@ const pick = (arr, n, salt) =>
       </div>
       <div class="top5-weapon">${hero.weapon}</div>
       <h3>${hero.name}</h3>
+      ${typeof floatScaleHtml === "function" ? floatScaleHtml(hero) : ""}
       <div class="top5-row">
         <span class="top5-price">${formatPrice(hero.price)}</span>
         <span class="top5-steam">${steam(hero)}</span>
+        <span class="card-off">−18%</span>
         <button class="btn btn-primary" data-add="${hero.id}">
           <i class="ph ph-shopping-cart-simple"></i>В корзину
         </button>
@@ -87,7 +92,10 @@ const pick = (arr, n, salt) =>
         <span class="top5-name">${p.weapon} | ${p.name}</span>
         <span class="top5-sub">${WEARS[p.wear].label} · float ${p.float.toFixed(4)}</span>
       </span>
-      <span class="top5-item-price">${formatPrice(p.price)}</span>
+      <span class="top5-item-prices">
+        <span class="top5-item-price">${formatPrice(p.price)}</span>
+        <span class="top5-item-steam">${steam(p)}</span>
+      </span>
     </a>
   `).join("");
 })();

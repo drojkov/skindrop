@@ -35,48 +35,11 @@ checkboxList("filter-type",   TYPES,    "types");
 checkboxList("filter-rarity", RARITIES, "rarities");
 checkboxList("filter-wear",   WEARS,    "wears");
 
-// ---------- Поиск: понимает кириллицу и транслит ----------
-
-// Русские названия, которые пишут чаще всего → как они называются в игре
-const ALIASES = {
-  "ак": "ak-47", "акм": "ak-47", "калаш": "ak-47",
-  "авп": "awp", "авипи": "awp",
-  "м4": "m4a", "эмка": "m4a",
-  "юсп": "usp-s", "глок": "glock-18", "дигл": "desert eagle", "деагл": "desert eagle",
-  "керамбит": "karambit", "бабочка": "butterfly", "штык": "bayonet", "м9": "m9 bayonet",
-  "перчатки": "gloves", "нож": "★",
-  "асиимов": "asiimov", "азимов": "asiimov", "редлайн": "redline", "вулкан": "vulcan",
-  "драгон": "dragon lore", "лор": "lore", "фейд": "fade",
-  "допплер": "doppler", "доплер": "doppler", "принтстрим": "printstream",
-  "неонуар": "neo-noir", "хайпербист": "hyper beast", "хайпер": "hyper beast",
-  "статтрек": "stattrak", "стат": "stattrak",
-};
-
-// Побуквенная транслитерация — на случай, если слова нет в ALIASES
-const TRANSLIT = {
-  а:"a",б:"b",в:"v",г:"g",д:"d",е:"e",ё:"e",ж:"zh",з:"z",и:"i",й:"y",к:"k",л:"l",м:"m",н:"n",
-  о:"o",п:"p",р:"r",с:"s",т:"t",у:"u",ф:"f",х:"h",ц:"c",ч:"ch",ш:"sh",щ:"sch",ъ:"",ы:"y",ь:"",
-  э:"e",ю:"yu",я:"ya",
-};
-
-// «AK-47» и «ак 47» должны совпадать: убираем всё, кроме букв и цифр
-const squash = str => str.toLowerCase().replace(/[^a-z0-9а-яё★]/g, "");
-
-// Из запроса делаем несколько вариантов написания; совпал любой — товар подходит
-function queryVariants(q) {
-  const raw = q.trim().toLowerCase();
-  if (!raw) return [];
-  const words = raw.split(/\s+/);
-  const aliased  = words.map(w => ALIASES[w] || w).join(" ");
-  const translit = raw.replace(/[а-яё]/g, ch => TRANSLIT[ch] ?? ch);
-  return [...new Set([raw, aliased, translit])].map(squash).filter(Boolean);
-}
-
 // ---------- Применяем фильтры ----------
 function getFiltered() {
-  const qs = queryVariants(state.q);
+  const q = state.q.toLowerCase();
   let items = listings.filter(p =>
-    (qs.length === 0 || qs.some(q => squash(p.fullName).includes(q))) &&
+    (!q || p.fullName.toLowerCase().includes(q)) &&
     (state.types.size === 0    || state.types.has(p.type)) &&
     (state.rarities.size === 0 || state.rarities.has(p.rarity)) &&
     (state.wears.size === 0    || state.wears.has(p.wear)) &&
@@ -178,7 +141,9 @@ if (urlQ) {
 }
 
 // Статистика в hero
-document.getElementById("stat-count").textContent = listings.length.toLocaleString("ru-RU");
-document.getElementById("stat-min").textContent = formatPrice(Math.min(...listings.map(p => p.price)));
+const statCount = document.getElementById("stat-count");
+const statMin   = document.getElementById("stat-min");
+if (statCount) statCount.textContent = listings.length.toLocaleString("ru-RU");
+if (statMin)   statMin.textContent = formatPrice(Math.min(...listings.map(p => p.price)));
 
 renderCatalog();

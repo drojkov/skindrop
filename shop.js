@@ -4,48 +4,45 @@
 //  HTML корзины и окна входа вставляет сам — чтобы не копировать в каждую страницу.
 // =====================================================================
 
+const STEAM_MARK = `<svg class="steam-ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11.98 2C6.5 2 2.02 6.16 1.54 11.47l5.4 2.23a3.06 3.06 0 0 1 1.74-.54h.15l2.4-3.48v-.05a4.08 4.08 0 1 1 4.08 4.1h-.1l-3.42 2.44v.13a3.07 3.07 0 0 1-6.07.6L1.9 15.1A10.46 10.46 0 0 0 11.98 22.5C17.78 22.5 22.5 17.8 22.5 12S17.78 2 11.98 2Zm-4.4 15.53.6.25a2.31 2.31 0 1 0 1.27-3.02l.72.3a1.7 1.7 0 1 1-1.3 3.13l-1.29-.66Zm10.5-9.85a2.73 2.73 0 1 0-2.73 2.74 2.73 2.73 0 0 0 2.73-2.74Zm-4.77 0a2.05 2.05 0 1 1 2.05 2.06 2.05 2.05 0 0 1-2.05-2.06Z"/></svg>`;
+
 // ---------- Вставляем общую разметку в конец body ----------
 document.body.insertAdjacentHTML("beforeend", `
   <div class="overlay" id="overlay"></div>
 
   <aside class="cart-drawer" id="cart-drawer">
     <div class="drawer-header">
-      <h2>Корзина</h2>
+      <h2>${typeof t === "function" ? t("cart.title", "Корзина") : "Корзина"}</h2>
       <button class="icon-btn" id="cart-close" aria-label="Закрыть"><i class="ph ph-x"></i></button>
     </div>
     <div class="cart-items" id="cart-items"></div>
     <div class="cart-summary">
-      <div class="cart-save" id="cart-save" hidden><span>Дешевле Steam на</span><b id="cart-save-value">$0.00</b></div>
-      <button class="link-btn" id="cart-clear">Очистить</button>
+      <div class="cart-save" id="cart-save" hidden><span>${typeof t === "function" ? t("cart.save", "Дешевле Steam на") : "Дешевле Steam на"}</span><b id="cart-save-value">$0.00</b></div>
+      <button class="link-btn" id="cart-clear">${typeof t === "function" ? t("cart.clear", "Очистить") : "Очистить"}</button>
       <div class="cart-summary-total">
-        <span>Итого</span>
+        <span>${typeof t === "function" ? t("cart.total", "Итого") : "Итого"}</span>
         <span class="cart-total" id="cart-total">$0.00</span>
       </div>
     </div>
-    <a href="checkout.html" class="btn btn-primary btn-block" id="checkout-btn"><i class="ph ph-arrow-right"></i>Перейти к оплате</a>
+    <a href="checkout.html" class="btn btn-primary btn-block" id="checkout-btn"><i class="ph ph-arrow-right"></i>${typeof t === "function" ? t("cart.checkout", "Перейти к оплате") : "Перейти к оплате"}</a>
   </aside>
 
   <dialog class="auth-modal" id="auth-modal">
     <form class="auth-form" id="auth-form">
       <div class="drawer-header">
-        <h2 id="auth-title">Вход</h2>
+        <h2 id="auth-title">Вход через Steam</h2>
         <button type="button" class="icon-btn" id="auth-close" aria-label="Закрыть"><i class="ph ph-x"></i></button>
       </div>
-      <label>Никнейм
-        <input type="text" name="nickname" required minlength="3" placeholder="s1mple">
-      </label>
-      <label id="email-label" hidden>Email
-        <input type="email" name="email" placeholder="you@example.com">
-      </label>
-      <label>Пароль
-        <input type="password" name="password" required minlength="4">
+      <div class="steam-auth">
+        <svg class="steam-ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11.98 2C6.5 2 2.02 6.16 1.54 11.47l5.4 2.23a3.06 3.06 0 0 1 1.74-.54h.15l2.4-3.48v-.05a4.08 4.08 0 1 1 4.08 4.1h-.1l-3.42 2.44v.13a3.07 3.07 0 0 1-6.07.6L1.9 15.1A10.46 10.46 0 0 0 11.98 22.5C17.78 22.5 22.5 17.8 22.5 12S17.78 2 11.98 2Zm-4.4 15.53.6.25a2.31 2.31 0 1 0 1.27-3.02l.72.3a1.7 1.7 0 1 1-1.3 3.13l-1.29-.66Zm10.5-9.85a2.73 2.73 0 1 0-2.73 2.74 2.73 2.73 0 0 0 2.73-2.74Zm-4.77 0a2.05 2.05 0 1 1 2.05 2.06 2.05 2.05 0 0 1-2.05-2.06Z"/></svg>
+        <p>Вы авторизуетесь на стороне Steam. Мы не видим ваш пароль — только ник, аватар и Steam ID.</p>
+      </div>
+      <label>Ваш ник в Steam
+        <input type="text" name="nickname" required minlength="3" placeholder="s1mple" autocomplete="off">
       </label>
       <p class="form-error" id="auth-error" hidden></p>
-      <button type="submit" class="btn btn-primary btn-block" id="auth-submit">Войти</button>
-      <p class="auth-switch">
-        <span id="auth-switch-text">Нет аккаунта?</span>
-        <button type="button" class="link-btn" id="auth-switch">Зарегистрироваться</button>
-      </p>
+      <button type="submit" class="btn btn-steam btn-block" id="auth-submit"><svg class="steam-ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11.98 2C6.5 2 2.02 6.16 1.54 11.47l5.4 2.23a3.06 3.06 0 0 1 1.74-.54h.15l2.4-3.48v-.05a4.08 4.08 0 1 1 4.08 4.1h-.1l-3.42 2.44v.13a3.07 3.07 0 0 1-6.07.6L1.9 15.1A10.46 10.46 0 0 0 11.98 22.5C17.78 22.5 22.5 17.8 22.5 12S17.78 2 11.98 2Zm-4.4 15.53.6.25a2.31 2.31 0 1 0 1.27-3.02l.72.3a1.7 1.7 0 1 1-1.3 3.13l-1.29-.66Zm10.5-9.85a2.73 2.73 0 1 0-2.73 2.74 2.73 2.73 0 0 0 2.73-2.74Zm-4.77 0a2.05 2.05 0 1 1 2.05 2.06 2.05 2.05 0 0 1-2.05-2.06Z"/></svg>Продолжить в Steam</button>
+      <p class="form-note">Демо: перехода на steamcommunity.com здесь нет.</p>
     </form>
   </dialog>
 `);
@@ -93,8 +90,8 @@ function renderCart() {
     cartItemsEl.innerHTML = `
       <div class="cart-empty">
         <i class="ph ph-shopping-cart-simple"></i>
-        <span>Пока пусто. Выберите лот в каталоге — добавится сюда.</span>
-        <a href="index.html" class="btn btn-ghost btn-small">В каталог</a>
+        <span>${typeof t === "function" ? t("cart.empty", "Пока пусто. Выберите лот в каталоге — добавится сюда.") : ""}</span>
+        <a href="index.html" class="btn btn-ghost btn-small">${typeof t === "function" ? t("cart.toCatalog", "В каталог") : "В каталог"}</a>
       </div>`;
     document.getElementById("cart-save").hidden = true;
     return;
@@ -110,8 +107,12 @@ function renderCart() {
       <div class="cart-item-info">
         <div class="cart-item-name">${p.fullName}</div>
         <div class="cart-item-wear">${WEARS[p.wear].label} · float ${p.float.toFixed(4)}</div>
+        ${typeof floatScaleHtml === "function" ? floatScaleHtml(p) : ""}
       </div>
-      <span class="cart-item-price">${formatPrice(p.price)}</span>
+      <span class="cart-item-prices">
+        <span class="cart-item-price">${formatPrice(p.price)}</span>
+        <span class="cart-item-steam">${formatPrice(p.price / 0.82)}</span>
+      </span>
       <button class="icon-btn" data-remove="${p.id}" aria-label="Убрать"><i class="ph ph-trash"></i></button>
     </div>
   `).join("");
@@ -135,11 +136,9 @@ document.getElementById("cart-clear").addEventListener("click", () => { cart = [
 overlayEl.addEventListener("click", closeCart);
 
 // =====================================================================
-//  ВХОД / РЕГИСТРАЦИЯ (фиктивные, всё в localStorage)
+//  ВХОД ЧЕРЕЗ STEAM (имитация, всё в localStorage)
 // =====================================================================
 let user  = JSON.parse(localStorage.getItem("user"))  || null;
-let users = JSON.parse(localStorage.getItem("users")) || {};
-let authMode = "login";
 
 const authModal  = document.getElementById("auth-modal");
 const authForm   = document.getElementById("auth-form");
@@ -156,56 +155,41 @@ function renderUser() {
   if (on) userNameEl.textContent = user.nickname;
 }
 
-function setAuthMode(mode) {
-  authMode = mode;
-  const isLogin = mode === "login";
-  document.getElementById("auth-title").textContent       = isLogin ? "Вход" : "Регистрация";
-  document.getElementById("auth-submit").textContent      = isLogin ? "Войти" : "Создать аккаунт";
-  document.getElementById("auth-switch-text").textContent = isLogin ? "Нет аккаунта?" : "Уже есть аккаунт?";
-  document.getElementById("auth-switch").textContent      = isLogin ? "Зарегистрироваться" : "Войти";
-  const emailLabel = document.getElementById("email-label");
-  emailLabel.hidden = isLogin;
-  emailLabel.querySelector("input").required = !isLogin;
+function openAuth() {
   authError.hidden = true;
-}
-
-function openAuth(mode = "login") {
-  setAuthMode(mode);
   authModal.showModal();
 }
 
 authForm.addEventListener("submit", e => {
   e.preventDefault();
-  const data = new FormData(authForm);
-  const nickname = data.get("nickname").trim();
-  const password = data.get("password");
+  const nickname = new FormData(authForm).get("nickname").trim();
+  if (nickname.length < 3) { showError("Ник в Steam — минимум 3 символа."); return; }
 
-  if (authMode === "register") {
-    if (users[nickname]) { showError("Такой никнейм уже занят."); return; }
-    users[nickname] = { password, email: data.get("email") };
-    localStorage.setItem("users", JSON.stringify(users));
-  } else if (!users[nickname] || users[nickname].password !== password) {
-    showError("Неверный никнейм или пароль."); return;
-  }
+  const submit = document.getElementById("auth-submit");
+  submit.disabled = true;
+  submit.innerHTML = '<i class="ph ph-circle-notch spin"></i>Ждём подтверждение в Steam…';
 
-  user = { nickname, email: users[nickname].email };
-  localStorage.setItem("user", JSON.stringify(user));
-  renderUser();
-  authForm.reset();
-  authModal.close();
+  setTimeout(() => {
+    user = { nickname };
+    localStorage.setItem("user", JSON.stringify(user));
+    renderUser();
+    authForm.reset();
+    authModal.close();
+    submit.disabled = false;
+    submit.innerHTML = STEAM_MARK + "Продолжить в Steam";
+  }, 900);
 });
 
 function showError(text) { authError.textContent = text; authError.hidden = false; }
 
-document.getElementById("auth-switch").addEventListener("click", () => setAuthMode(authMode === "login" ? "register" : "login"));
 document.getElementById("auth-close").addEventListener("click", () => authModal.close());
-loginBtn.addEventListener("click", () => openAuth("login"));
+loginBtn.addEventListener("click", () => openAuth());
 logoutBtn.addEventListener("click", () => { user = null; localStorage.removeItem("user"); renderUser(); });
 authModal.addEventListener("click", e => { if (e.target === authModal) authModal.close(); });
 
 // Чекаут без входа → окно входа
 checkoutBtn.addEventListener("click", e => {
-  if (user === null) { e.preventDefault(); closeCart(); openAuth("login"); }
+  if (user === null) { e.preventDefault(); closeCart(); openAuth(); }
 });
 
 // =====================================================================

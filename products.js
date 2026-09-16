@@ -184,15 +184,36 @@ function findListing(id) {
   return listings.find(l => l.id === id);
 }
 
+// Цена того же предмета в Steam — на сайте лоты на 18% дешевле
+const STEAM_MARKUP = 1 / 0.82;
+function steamPrice(item) { return item.price * STEAM_MARKUP; }
+
+// Шкала float с маркером: положение маркера = сам float (0…1)
+function floatScaleHtml(item) {
+  const pos = Math.max(0, Math.min(1, item.float)) * 100;
+  const stops = Object.values(WEARS).map(w => w.float[1] * 100);
+  return `
+    <div class="card-scale" title="float ${item.float.toFixed(4)} · ${WEARS[item.wear].label}">
+      ${stops.slice(0, -1).map(s => `<span class="card-scale-tick" style="left: ${s}%"></span>`).join("")}
+      <span class="card-scale-mark" style="left: ${pos}%"></span>
+    </div>`;
+}
+
 // HTML одной карточки товара — используется в каталоге и в «похожих»
 function cardHtml(item) {
   const rarity = RARITIES[item.rarity];
   return `
-    <article class="card" style="--rarity: ${rarity.color}">
+    <article class="card" style="--rarity: ${rarity.color}" data-tilt>
       <a class="card-preview" href="product.html?skin=${item.skinId}">
+        <span class="card-halo"></span>
         <img src="${item.image}" alt="" loading="lazy" onerror="this.remove()">
         <span class="card-fallback">${item.weapon}</span>
-        ${item.stattrak ? `<span class="tag tag-st">StatTrak™</span>` : ""}
+        <span class="card-rarity">${rarity.label}</span>
+        <span class="card-badges">
+          ${item.stattrak ? `<span class="tag tag-st">StatTrak™</span>` : ""}
+          ${item.souvenir ? `<span class="tag tag-sv">Souvenir</span>` : ""}
+        </span>
+        <span class="card-gloss"></span>
       </a>
       <div class="card-body">
         <div class="card-weapon">${item.weapon}</div>
@@ -201,8 +222,13 @@ function cardHtml(item) {
           <span class="tag" title="${WEARS[item.wear].label}">${item.wear}</span>
           <span class="card-float">float ${item.float.toFixed(4)}</span>
         </div>
+        ${floatScaleHtml(item)}
         <div class="card-footer">
-          <span class="card-price">${formatPrice(item.price)}</span>
+          <span class="card-prices">
+            <span class="card-price">${formatPrice(item.price)}</span>
+            <span class="card-steam">${formatPrice(steamPrice(item))}</span>
+          </span>
+          <span class="card-off">−18%</span>
           <button class="btn btn-primary btn-small" data-add="${item.id}"><i class="ph ph-shopping-cart-simple"></i>В корзину</button>
         </div>
       </div>

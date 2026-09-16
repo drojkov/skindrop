@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Товар — SkinDrop</title>
+  <title>Политика cookie — SkinDrop</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Chakra+Petch:ital,wght@0,600;0,700;1,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
@@ -35,53 +35,42 @@
   </header>
 
   <main class="page">
-    <nav class="crumbs">
-      <a href="index.html">Каталог</a>
-      <span id="crumb-type"></span>
-      <span id="crumb-name"></span>
-    </nav>
-
-    <section class="product" id="product">
-      <div class="product-preview">
-        <img id="p-image" alt="">
-        <span class="card-fallback" id="p-fallback"></span>
-      </div>
-
-      <div class="product-info">
-        <div class="card-weapon" id="p-weapon"></div>
-        <h1 id="p-name"></h1>
-        <div class="product-meta">
-          <span class="tag tag-rarity" id="p-rarity"></span>
-          <span class="product-from" id="p-from"></span>
-        </div>
-        <div class="p-extras" id="p-extras"></div>
-        <div class="p-spark" id="p-spark"></div>
-
-        <p class="product-note">Выберите состояние ниже. Float — точная степень износа: чем меньше значение, тем чище скин.</p>
-
-        <div class="variants" id="variants"></div>
-
-        <div class="p-trust">
-          <div class="p-trust-item">
-            <i class="ph ph-lightning"></i>
-            <div><strong>Выдача за 90 секунд</strong><span>оффер приходит сразу после оплаты</span></div>
-          </div>
-          <div class="p-trust-item">
-            <i class="ph ph-shield-check"></i>
-            <div><strong>Возврат за час</strong><span>если трейд не прошёл</span></div>
-          </div>
-          <div class="p-trust-item">
-            <i class="ph ph-magnifying-glass-plus"></i>
-            <div><strong>Float сверен вручную</strong><span>скриншот инспекции в лоте</span></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="similar-wrap">
-      <div class="section-head" style="margin-bottom:16px"><h2>Похожие лоты</h2><a href="index.html">Весь каталог →</a></div>
-      <div class="catalog" id="similar"></div>
-    </section>
+    <nav class="crumbs"><a href="index.html">Маркет</a><span>Политика cookie</span></nav>
+    <article class="doc">
+      <header class="doc-head">
+        <h1>Политика использования cookie</h1>
+        <p class="doc-lead">Какие cookie и похожие технологии использует сайт, зачем они нужны и как изменить своё решение.</p>
+        <p class="doc-meta">Редакция от 17 сентября 2026 · версия 1.0</p>
+      </header>
+      <p class="doc-note">Шаблон документа. Перед публикацией заполните реквизиты компании и дайте текст на проверку юристу вашей юрисдикции.</p>
+      <section class="doc-sec">
+        <h2>1. Что такое cookie</h2>
+        <p>Cookie — небольшие файлы, которые сайт сохраняет в браузере. Мы также используем localStorage для корзины, выбранного языка, валюты и прогресса мини-игры. Далее всё это для краткости называется cookie.</p>
+      </section>
+      <section class="doc-sec">
+        <h2>2. Категории</h2>
+        <div class="doc-table-wrap"><table class="table">
+        <thead><tr><th>Категория</th><th>Зачем</th><th>Срок</th><th>Согласие</th></tr></thead>
+        <tbody>
+        <tr><td>Необходимые</td><td>Сессия входа через Steam, корзина, язык и валюта, защита от мошенничества</td><td>до 12 месяцев</td><td>не требуется</td></tr>
+        <tr><td>Аналитика</td><td>Обезличенная статистика посещений, ошибок и скорости загрузки</td><td>до 24 месяцев</td><td>требуется</td></tr>
+        <tr><td>Маркетинг</td><td>Оценка эффективности рекламных кампаний, персональные предложения</td><td>до 12 месяцев</td><td>требуется</td></tr>
+        </tbody></table></div>
+        <p>Конкретные имена файлов и поставщиков: <span class="doc-fill">заполнить после подключения аналитики и рекламных систем</span>.</p>
+      </section>
+      <section class="doc-sec">
+        <h2>3. Как управлять</h2>
+        <p>При первом визите внизу страницы появляется плашка выбора. Решение можно изменить в любой момент — кнопка <button type="button" class="link-btn" onclick="openCookieSettings()">Настройки cookie</button> в подвале сайта. Необходимые cookie отключить нельзя: без них не работают вход и корзина. Дополнительно cookie можно удалить средствами браузера, но тогда сбросятся корзина и настройки.</p>
+      </section>
+      <section class="doc-sec">
+        <h2>4. Передача данных</h2>
+        <p>Аналитические и маркетинговые cookie могут передавать обезличенные данные поставщикам этих сервисов, в том числе за пределы вашей страны. Основания и меры защиты описаны в <a href="privacy.html">политике конфиденциальности</a>.</p>
+      </section>
+      <section class="doc-sec">
+        <h2>5. Срок хранения решения</h2>
+        <p>Ваш выбор хранится 12 месяцев, после чего плашка появится снова. Мы также повторно спросим согласие, если изменится состав используемых cookie.</p>
+      </section>
+    </article>
   </main>
 
   <footer class="footer">
@@ -126,7 +115,5 @@
   <script src="prefs.js"></script>
   <script src="shop.js"></script>
   <script src="consent.js"></script>
-  <script src="tilt.js"></script>
-  <script src="product.js"></script>
 </body>
 </html>

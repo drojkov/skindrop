@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SkinDrop — маркет скинов CS2</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Chakra+Petch:ital,wght@0,600;0,700;1,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
   <link rel="stylesheet" href="style.css">
@@ -16,19 +16,19 @@
     <div class="header-inner">
       <a href="index.html" class="logo"><span class="logo-mark"><i class="ph-fill ph-drop"></i></span>Skin<span class="logo-accent">Drop</span></a>
       <nav class="header-nav">
-        <a href="index.html" class="is-active">Маркет</a>
-        <a href="how-to.html">Как купить</a>
+        <a href="index.html" class="is-active" data-i18n="nav.market">Маркет</a>
+        <a href="how-to.html" data-i18n="nav.how">Как купить</a>
       </nav>
       <div class="search">
         <i class="ph ph-magnifying-glass"></i>
-        <input type="search" id="search" placeholder="Поиск: AK-47, авп, керамбит, asiimov…" autocomplete="off">
+        <input type="search" id="search" placeholder="Найти скин: АК-47, Азимов, Керамбит и т.д." data-i18n-ph="search.ph" autocomplete="off">
       </div>
       <nav class="header-actions">
         <span class="user-name" id="user-name" hidden></span>
-        <button class="btn btn-ghost" id="login-btn">Войти</button>
-        <button class="btn btn-ghost" id="logout-btn" hidden>Выйти</button>
+        <button class="btn btn-steam" id="login-btn"><svg class="steam-ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11.98 2C6.5 2 2.02 6.16 1.54 11.47l5.4 2.23a3.06 3.06 0 0 1 1.74-.54h.15l2.4-3.48v-.05a4.08 4.08 0 1 1 4.08 4.1h-.1l-3.42 2.44v.13a3.07 3.07 0 0 1-6.07.6L1.9 15.1A10.46 10.46 0 0 0 11.98 22.5C17.78 22.5 22.5 17.8 22.5 12S17.78 2 11.98 2Zm-4.4 15.53.6.25a2.31 2.31 0 1 0 1.27-3.02l.72.3a1.7 1.7 0 1 1-1.3 3.13l-1.29-.66Zm10.5-9.85a2.73 2.73 0 1 0-2.73 2.74 2.73 2.73 0 0 0 2.73-2.74Zm-4.77 0a2.05 2.05 0 1 1 2.05 2.06 2.05 2.05 0 0 1-2.05-2.06Z"/></svg><span data-i18n="auth.login">Войти через Steam</span></button>
+        <button class="btn btn-ghost" id="logout-btn" hidden data-i18n="auth.logout">Выйти</button>
         <button class="btn btn-primary" id="cart-btn">
-          <i class="ph ph-shopping-cart-simple"></i>Корзина <span class="cart-count" id="cart-count" hidden>0</span>
+          <i class="ph ph-shopping-cart-simple"></i><span data-i18n="cart.btn">Корзина</span> <span class="cart-count" id="cart-count" hidden>0</span>
         </button>
       </nav>
     </div>
@@ -44,55 +44,52 @@
   </div>
 
   <main>
-    <!-- Hero: цифры магазина и быстрые ссылки по категориям -->
-    <section class="hero">
-      <div class="hero-inner">
-        <div>
-          <h1>Скины CS2 дешевле Steam</h1>
-          <p>Мгновенная передача через трейд-оффер. Проверка предмета до оплаты, возврат средств если трейд не прошёл.</p>
+    <!-- Hero -->
+    <section class="nhero" id="nhero">
+      <div class="nhero-glow" aria-hidden="true"></div>
+      <div class="nhero-inner">
+        <div class="nhero-left">
+          <h1 class="nhero-title">
+            <span class="nhero-line" id="hero-title-static"></span>
+            <span class="nhero-line nhero-line-accent"><span id="hero-type"></span><span class="nhero-caret" aria-hidden="true"></span></span>
+          </h1>
+          <p class="nhero-sub" id="hero-sub"></p>
+          <div class="nhero-actions">
+            <a class="btn btn-primary" href="#catalog-top" id="hero-cta"></a>
+            <a class="btn btn-ghost" href="how-to.html" id="hero-cta-alt"></a>
+          </div>
+          <div class="hero-stats" id="hero-stats"></div>
         </div>
-        <div class="hero-stats">
-          <div class="stat"><strong id="stat-count">0</strong><span>предложений</span></div>
-          <div class="stat"><strong id="stat-min">—</strong><span>минимальная цена</span></div>
-          <div class="stat"><strong>-18%</strong><span>к цене Steam</span></div>
-        </div>
-      </div>
-      <div class="hero-links">
-        <a href="#" data-type-link="knife">Ножи</a>
-        <a href="#" data-type-link="gloves">Перчатки</a>
-        <a href="#" data-type-link="rifle">Винтовки</a>
-        <a href="#" data-type-link="sniper">Снайперские</a>
-        <a href="#" data-type-link="pistol">Пистолеты</a>
-        <a href="#" data-type-link="smg">ПП</a>
+        <div class="nhero-stage" id="hero-stage"></div>
       </div>
     </section>
 
     <!-- Цифры сервиса -->
     <section class="band reveal">
       <div class="band-item">
-        <i class="ph ph-lightning"></i>
-        <div><strong>90 секунд</strong><span>медианное время выдачи</span></div>
+        <i class="ph ph-clock-countdown"></i>
+        <div><strong data-i18n="band.fast">Мгновенная выдача</strong></div>
       </div>
       <div class="band-item">
         <i class="ph ph-shield-check"></i>
-        <div><strong>Возврат за час</strong><span>если трейд не прошёл</span></div>
+        <div><strong data-i18n="band.refund">Возврат средств</strong><span data-i18n="band.refundSub">если трейд не прошёл</span></div>
       </div>
       <div class="band-item">
         <i class="ph ph-magnifying-glass-plus"></i>
-        <div><strong>Float сверен</strong><span>инспекция каждой позиции</span></div>
+        <div><strong data-i18n="band.float">Float сверен</strong><span data-i18n="band.floatSub">инспекция каждой позиции</span></div>
       </div>
       <div class="band-item">
         <i class="ph ph-handshake"></i>
-        <div><strong>4 200 сделок</strong><span>за последние 30 дней</span></div>
+        <div><strong data-i18n="band.deals">4 200 сделок</strong><span data-i18n="band.dealsSub">за последние 30 дней</span></div>
       </div>
     </section>
 
     <!-- Топ-5 лотов дня -->
     <section class="section reveal">
       <div class="section-head">
-        <h2>Топ-5 лотов дня</h2>
-        <p>подборка обновляется каждые сутки</p>
-        <a href="#catalog-top">Весь каталог →</a>
+        <h2 data-i18n="sec.top5">Топ-5 лотов дня</h2>
+        <p data-i18n="sec.top5sub">подборка обновляется каждые сутки</p>
+        <a href="#catalog-top" data-i18n="sec.all">Весь каталог →</a>
       </div>
       <div class="top5">
         <div class="top5-hero" id="top5-hero"></div>
@@ -104,12 +101,12 @@
       <!-- Левая колонка: фильтры. Чекбоксы внутрь генерирует catalog.js -->
       <form class="filters" id="filters">
         <div class="filters-head">
-          <h2>Фильтры</h2>
-          <button type="button" class="link-btn" id="filters-reset">Сбросить</button>
+          <h2 data-i18n="filters.title">Фильтры</h2>
+          <button type="button" class="link-btn" id="filters-reset" data-i18n="filters.reset">Сбросить</button>
         </div>
 
         <fieldset>
-          <legend>Тип</legend>
+          <legend data-i18n="filters.type">Тип</legend>
           <div id="filter-type"></div>
         </fieldset>
 
@@ -178,25 +175,41 @@
         <h4>Магазин</h4>
         <nav class="footer-links">
           <a href="index.html">Каталог</a>
-          <a href="how-to.html">Как купить</a>
+          <a href="how-to.html" data-i18n="nav.how">Как купить</a>
           <a href="index.html#catalog-top">Фильтры и float</a>
+        </nav>
+      </div>
+      <div>
+        <h4>Документы</h4>
+        <nav class="footer-links">
+          <a href="terms.html">Пользовательское соглашение</a>
+          <a href="privacy.html">Политика конфиденциальности</a>
+          <a href="cookies.html">Политика cookie</a>
+          <a href="refund.html">Оплата и возврат</a>
+          <a href="aml.html">AML / KYC</a>
         </nav>
       </div>
       <div>
         <h4>Поддержка</h4>
         <nav class="footer-links">
+          <a href="contacts.html">Контакты и реквизиты</a>
           <a href="how-to.html#faq">Частые вопросы</a>
           <a href="mailto:help@skindrop.example">help@skindrop.example</a>
-          <a href="how-to.html#faq">Возврат средств</a>
+          <button type="button" class="link-btn" onclick="openCookieSettings()">Настройки cookie</button>
         </nav>
       </div>
     </div>
-    <div class="footer-bottom">SkinDrop · учебный проект, покупки не проводятся</div>
+    <div class="footer-bottom">SkinDrop · учебный проект, покупки не проводятся · 18+</div>
   </footer>
 
   <script src="data.js"></script>
   <script src="products.js"></script>
+  <script src="prefs.js"></script>
   <script src="shop.js"></script>
+  <script src="consent.js"></script>
+  <script src="tilt.js"></script>
+  <script src="match3.js"></script>
+  <script src="hero.js"></script>
   <script src="catalog.js"></script>
   <script src="home.js"></script>
 </body>

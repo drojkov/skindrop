@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Товар — SkinDrop</title>
+  <title>Оплата и возврат — SkinDrop</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Chakra+Petch:ital,wght@0,600;0,700;1,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
@@ -35,53 +35,41 @@
   </header>
 
   <main class="page">
-    <nav class="crumbs">
-      <a href="index.html">Каталог</a>
-      <span id="crumb-type"></span>
-      <span id="crumb-name"></span>
-    </nav>
-
-    <section class="product" id="product">
-      <div class="product-preview">
-        <img id="p-image" alt="">
-        <span class="card-fallback" id="p-fallback"></span>
-      </div>
-
-      <div class="product-info">
-        <div class="card-weapon" id="p-weapon"></div>
-        <h1 id="p-name"></h1>
-        <div class="product-meta">
-          <span class="tag tag-rarity" id="p-rarity"></span>
-          <span class="product-from" id="p-from"></span>
-        </div>
-        <div class="p-extras" id="p-extras"></div>
-        <div class="p-spark" id="p-spark"></div>
-
-        <p class="product-note">Выберите состояние ниже. Float — точная степень износа: чем меньше значение, тем чище скин.</p>
-
-        <div class="variants" id="variants"></div>
-
-        <div class="p-trust">
-          <div class="p-trust-item">
-            <i class="ph ph-lightning"></i>
-            <div><strong>Выдача за 90 секунд</strong><span>оффер приходит сразу после оплаты</span></div>
-          </div>
-          <div class="p-trust-item">
-            <i class="ph ph-shield-check"></i>
-            <div><strong>Возврат за час</strong><span>если трейд не прошёл</span></div>
-          </div>
-          <div class="p-trust-item">
-            <i class="ph ph-magnifying-glass-plus"></i>
-            <div><strong>Float сверен вручную</strong><span>скриншот инспекции в лоте</span></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="similar-wrap">
-      <div class="section-head" style="margin-bottom:16px"><h2>Похожие лоты</h2><a href="index.html">Весь каталог →</a></div>
-      <div class="catalog" id="similar"></div>
-    </section>
+    <nav class="crumbs"><a href="index.html">Маркет</a><span>Оплата и возврат</span></nav>
+    <article class="doc">
+      <header class="doc-head">
+        <h1>Оплата, возврат и отмена заказа</h1>
+        <p class="doc-lead">Как проходит оплата, в каких случаях деньги возвращаются и в какие сроки.</p>
+        <p class="doc-meta">Редакция от 17 сентября 2026 · версия 1.0</p>
+      </header>
+      <p class="doc-note">Шаблон документа. Перед публикацией заполните реквизиты компании и дайте текст на проверку юристу вашей юрисдикции.</p>
+      <section class="doc-sec">
+        <h2>1. Оплата</h2>
+        <p>Цена лота фиксируется при оформлении заказа. Доступные способы оплаты: <span class="doc-fill">указать провайдеров</span>. Платёж проводит платёжный провайдер; реквизиты карты на сайт не попадают. Валюта списания может отличаться от валюты отображения — курс и комиссию определяет банк.</p>
+      </section>
+      <section class="doc-sec">
+        <h2>2. Когда деньги возвращаются полностью</h2>
+        <ul>
+        <li>Трейд-оффер не удалось передать по техническим причинам или из-за ограничений Steam.</li>
+        <li>Лот был продан другому покупателю до подтверждения вашего платежа.</li>
+        <li>Переданный предмет не соответствует описанию: другой износ, float или отсутствуют наклейки.</li>
+        <li>Заказ отменён оператором по результатам проверки.</li>
+        </ul>
+        <p>Срок возврата — в течение часа после отмены на внутренний баланс либо 3–10 рабочих дней при возврате на карту, срок зависит от банка.</p>
+      </section>
+      <section class="doc-sec">
+        <h2>3. Когда возврат невозможен</h2>
+        <p>Предмет цифровой и передаётся немедленно, поэтому после принятия трейд-оффера возврат по причине «передумал» не производится. Для потребителей ЕЭЗ это соответствует исключению из права на отказ при поставке цифрового контента с явного согласия покупателя и подтверждением утраты права на отказ (Директива 2011/83/ЕС, ст. 16(m)).</p>
+      </section>
+      <section class="doc-sec">
+        <h2>4. Спорные ситуации</h2>
+        <p>Опишите проблему на <a href="mailto:help@skindrop.example">help@skindrop.example</a>, приложите номер заказа и скриншот истории обменов Steam. Ответ — в течение 24 часов, решение — до 14 дней. Если решение вас не устроит, остаются варианты из раздела о спорах в <a href="terms.html">пользовательском соглашении</a>.</p>
+      </section>
+      <section class="doc-sec">
+        <h2>5. Чарджбэк</h2>
+        <p>До обращения в банк напишите нам: чаще всего вопрос закрывается быстрее. Необоснованный чарджбэк ведёт к блокировке аккаунта и взысканию издержек.</p>
+      </section>
+    </article>
   </main>
 
   <footer class="footer">
@@ -126,7 +114,5 @@
   <script src="prefs.js"></script>
   <script src="shop.js"></script>
   <script src="consent.js"></script>
-  <script src="tilt.js"></script>
-  <script src="product.js"></script>
 </body>
 </html>
