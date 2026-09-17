@@ -643,6 +643,120 @@ img + .card-fallback { display: none; }
 .card-footer .btn { margin-left: auto; }
 
 /* =====================================================================
+   КОРЗИНА: затемнение + выезжающая панель
+   ===================================================================== */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: rgba(8, 9, 14, 0.62);
+  backdrop-filter: blur(2px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.22s ease, visibility 0.22s ease;
+}
+.overlay.open { opacity: 1; visibility: visible; }
+
+.cart-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 70;
+  width: min(420px, 100vw);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 18px;
+  background: var(--surface);
+  border-left: 1px solid var(--line);
+  box-shadow: -24px 0 60px rgba(0, 0, 0, 0.5);
+  transform: translateX(100%);
+  transition: transform 0.26s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.cart-drawer.open { transform: translateX(0); }
+
+.drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+}
+.drawer-header h2 { font-size: 18px; }
+
+.cart-items {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 48px 24px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 14px;
+}
+.cart-empty i { font-size: 34px; color: var(--muted-2); }
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 12px 12px 14px;
+  border-bottom: 1px solid var(--line-soft);
+  border-left: 2px solid var(--rarity, var(--line));
+}
+.cart-item:last-child { border-bottom: 0; }
+.cart-item-info { flex: 1; min-width: 0; }
+.cart-item-name { font-size: 14px; font-weight: 500; }
+.cart-item-wear { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.cart-item-price { font-size: 15px; font-weight: 500; white-space: nowrap; }
+
+.cart-summary {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 8px 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+.cart-save {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--muted);
+}
+.cart-save b { color: var(--up); font-size: 14px; }
+.cart-summary-total { display: flex; align-items: baseline; gap: 8px; font-size: 13px; color: var(--muted); }
+.cart-total { font-size: 20px; font-weight: 500; color: var(--text); }
+
+.link-btn {
+  justify-self: start;
+  background: none;
+  border: 0;
+  padding: 0;
+  font-size: 13px;
+  color: var(--muted);
+  cursor: pointer;
+}
+.link-btn:hover { color: var(--danger); }
+
+.btn.disabled { opacity: 0.45; pointer-events: none; }
+
+@media (max-width: 720px) {
+  .cart-drawer { width: 100vw; }
+}
+
+/* =====================================================================
    ФОРМЫ: вход, чекаут
    ===================================================================== */
 .auth-modal {
